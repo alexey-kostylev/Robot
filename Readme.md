@@ -2,7 +2,7 @@
 
 ## How to run the project
 
-Goto the project directory and run the following command
+Goto the project directory and run the following command  from command line:
 ```bash 
 dotnet build 
 ```
@@ -10,6 +10,11 @@ dotnet build
 When the build is done, run the following command
 ```bash
 dotnet run --project Robot.host/ChampionRobot.Host.csproj --file commands.txt
+```
+
+To run a standalone console application you need to go to "Robot.Host\bin\Debug\net8.0" directory and run the following command:
+```bash
+ChampionRobot.Host.exe --file commands.txt
 ```
 
 It will run the project using the commands.txt file located in the project root directory.
