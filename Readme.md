@@ -19,6 +19,12 @@ ChampionRobot.Host.exe --file commands.txt
 
 It will run the project using the commands.txt file located in the project root directory.
 
+To run it interactively, run the following command omitting '--file' argument:
+```bash
+ChampionRobot.Host.exe
+```
+
+
 ## Project structure
 The project has three main directories: 
 - Robot.Host
