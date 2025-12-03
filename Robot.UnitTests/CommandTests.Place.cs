@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ChampionRobot.Logic;
+﻿using ChampionRobot.Logic;
 using ChampionRobot.Logic.Commands;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace ChampionRobot.UnitTests;
 public partial class CommandTests
