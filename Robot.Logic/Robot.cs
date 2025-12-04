@@ -141,7 +141,7 @@ public class Robot(ILogger<Robot> _logger)
             throw new InvalidOperationException("Current direction is not set");
         }
 
-        var step = _currentDirection.Value switch
+        (int x, int y) = _currentDirection.Value switch
         {
             Direction.NORTH => (0, 1),
             Direction.SOUTH => (0, -1),
@@ -149,8 +149,6 @@ public class Robot(ILogger<Robot> _logger)
             Direction.WEST => (1, 0),
             _ => throw new NotImplementedException($"Invalid direction: {_currentDirection}")
         };
-
-        (int x, int y) = step;
 
         // _currentPosition is already checked for null
         var newPosition = _currentPosition! with
