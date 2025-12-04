@@ -73,6 +73,12 @@ public class Robot(ILogger<Robot> _logger)
         => ExecutionResult.Fail("Robot must be positioned first");
 
     private ExecutionResult HandleLeftCommand(LeftCommand command)
+        => Rotate(RotateDirection.Left);
+
+    private ExecutionResult HandleRightCommand(RightCommand command)
+        => Rotate(RotateDirection.Right);
+
+    private ExecutionResult Rotate(RotateDirection rotateDirection)
     {
         if (!IsPositioned())
         {
@@ -84,40 +90,38 @@ public class Robot(ILogger<Robot> _logger)
             throw new InvalidOperationException("Current direction is not set");
         }
 
-        _currentDirection = _currentDirection.Value switch
+        _currentDirection = rotateDirection switch
         {
-            Direction.NORTH => Direction.WEST,
-            Direction.SOUTH => Direction.EAST,
-            Direction.EAST => Direction.NORTH,
-            Direction.WEST => Direction.SOUTH,
-            _ => throw new InvalidOperationException($"Invalid direction: {_currentDirection}")
+            RotateDirection.Left => RotateLeft(_currentDirection.Value),
+            RotateDirection.Right => RotateRight(_currentDirection.Value),
+            _ => throw new NotImplementedException($"Invalid rotate direction: {rotateDirection}")
         };
 
         return ExecutionResult.Success($"Set a new direction: {_currentDirection}");
     }
 
-    private ExecutionResult HandleRightCommand(RightCommand command)
+    private static Direction RotateLeft(Direction direction)
     {
-        if (!IsPositioned())
+        return direction switch
         {
-            return CreateRobotIsNotPositionedResult();
-        }
+            Direction.NORTH => Direction.WEST,
+            Direction.SOUTH => Direction.EAST,
+            Direction.EAST => Direction.NORTH,
+            Direction.WEST => Direction.SOUTH,
+            _ => throw new InvalidOperationException($"Invalid direction: {direction}")
+        };
+    }
 
-        if (_currentDirection == null)
-        {
-            throw new InvalidOperationException("Current direction is not set");
-        }
-
-        _currentDirection = _currentDirection.Value switch
+    private static Direction RotateRight(Direction direction)
+    {
+        return direction switch
         {
             Direction.NORTH => Direction.EAST,
-            Direction.SOUTH => Direction.WEST,
             Direction.EAST => Direction.SOUTH,
+            Direction.SOUTH => Direction.WEST,
             Direction.WEST => Direction.NORTH,
-            _ => throw new InvalidOperationException($"Invalid direction: {_currentDirection}")
+            _ => throw new InvalidOperationException($"Invalid direction: {direction}")
         };
-
-        return ExecutionResult.Success($"Set a new direction: {_currentDirection}");
     }
 
     private ExecutionResult HandleMoveCommand(MoveCommand command)

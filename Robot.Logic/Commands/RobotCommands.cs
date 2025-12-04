@@ -24,3 +24,8 @@ public record ReportCommand() : CommandBase(CommandType.Report)
 {
 
 }
+
+public enum RotateDirection
+{
+    Left, Right
+}
