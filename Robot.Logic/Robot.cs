@@ -39,7 +39,7 @@ public class Robot(ILogger<Robot> _logger)
         }
         finally
         {
-            _logger.LogTrace("State: [{X},{Y}] {Dirrection}", _currentPosition?.X, _currentPosition?.Y, _currentDirection);
+            _logger.LogTrace("State: [{X},{Y}] {Direction}", _currentPosition?.X, _currentPosition?.Y, _currentDirection);
         }
     }
 
